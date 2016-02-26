@@ -38,7 +38,7 @@ float DHT::readTemperature(bool S, bool force) {
   if (read(force)) {
     switch (_type) {
     case DHT11:
-      f = data[2];
+      f = data[2]+data[3]/100;
       if(S) {
         f = convertCtoF(f);
       }
@@ -74,7 +74,7 @@ float DHT::readHumidity(bool force) {
   if (read()) {
     switch (_type) {
     case DHT11:
-      f = data[0];
+      f = data[0]+data[1]/100;
       break;
     case DHT22:
     case DHT21:
